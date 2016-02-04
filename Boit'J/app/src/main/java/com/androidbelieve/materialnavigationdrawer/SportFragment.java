@@ -40,6 +40,7 @@ public class SportFragment extends android.support.v4.app.Fragment {
         return articleResumes;
     }
 
+
     private void afficherListeTweets(){
         List<ArticleResume> articleResumes = genererTweets();
 
