@@ -6,4 +6,11 @@
 
     <color name="toolBarColor">#4682B4</color>
 
+    <!-- Article -->
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="couleur_titre">#000000</color>
+    <color name="couleur_contenu">#000000</color>
+
 </resources>
