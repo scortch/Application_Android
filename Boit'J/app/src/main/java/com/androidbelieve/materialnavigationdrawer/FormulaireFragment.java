@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 
 public class FormulaireFragment extends Fragment {
-    private EditText recipient;
     private EditText subject;
     private EditText body;
 
@@ -26,8 +25,6 @@ public class FormulaireFragment extends Fragment {
         final Button button = (Button) view.findViewById(R.id.ButtonSendFeedback);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                recipient = (EditText) view.findViewById(R.id.EditTextEmail);
                 subject = (EditText) view.findViewById(R.id.EditTextObjet);
                 body = (EditText) view.findViewById(R.id.EditTextFeedbackBody);
 
@@ -45,7 +42,6 @@ public class FormulaireFragment extends Fragment {
                 }
                 if (!TextUtils.isEmpty(strObjet) || !TextUtils.isEmpty(strFeedback)) {
                     sendEmail();
-                    recipient.setText("");
                     subject.setText("");
                     body.setText("");
                 }
@@ -58,11 +54,11 @@ public class FormulaireFragment extends Fragment {
 
     public void sendEmail()
     {
-        String[] recipients = {recipient.getText().toString()};
+
+        Intent email = new Intent(Intent.ACTION_SEND);
+        email.setType("plain/text");
         //mettre le mail ici
-        Intent email = new Intent(Intent.ACTION_SEND, Uri.parse("jordy.froment@hotmail.fr"));
-        email.setType("message/rfc822");
-        email.putExtra(Intent.EXTRA_EMAIL, recipients);
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{"email@host.com"});
         email.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
         email.putExtra(Intent.EXTRA_TEXT, body.getText().toString());
 

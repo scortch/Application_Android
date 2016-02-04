@@ -32,8 +32,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="feedbackname">Nom</string>
-    <string name="feedbackemail">Email</string>
     <string name="feedbackobjet">Objet</string>
     <string name="feedbackbody">Ecrivez votre feedback ici</string>
     <string name="feedbackbutton">Envoyer</string>
