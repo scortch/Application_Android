@@ -25,9 +25,13 @@ public class ArticleAdapter extends ArrayAdapter<ArticleResume> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_tweet,parent, false);
         }
 
-        TweetViewHolder viewHolder = (TweetViewHolder) convertView.getTag();
+        ArticleViewHolder viewHolder = (ArticleViewHolder) convertView.getTag();
         if(viewHolder == null){
+<<<<<<< HEAD
             viewHolder = new TweetViewHolder(getContext());
+=======
+            viewHolder = new ArticleViewHolder();
+>>>>>>> origin/master
             viewHolder.pseudo = (TextView) convertView.findViewById(R.id.pseudo);
             viewHolder.text = (TextView) convertView.findViewById(R.id.text);
             viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
@@ -49,7 +53,11 @@ public class ArticleAdapter extends ArrayAdapter<ArticleResume> {
         return convertView;
     }
 
+<<<<<<< HEAD
     private class TweetViewHolder extends View{
+=======
+    private class ArticleViewHolder {
+>>>>>>> origin/master
         public TextView pseudo;
         public TextView text;
         public ImageView avatar;

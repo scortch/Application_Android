@@ -62,18 +62,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             switch (getPosition()){
                 case 1:
-                    Fragment squadFragment = new SportFragment();
-                    fragmentTransaction.replace(R.id.containerView,squadFragment);
+                    Fragment sportFragment = new SportFragment();
+                    fragmentTransaction.replace(R.id.containerView,sportFragment);
                     fragmentTransaction.commit();
                     break;
                 case 2:
-                    Fragment fixtureFragment = new CMJFragment();
-                    fragmentTransaction.replace(R.id.containerView,fixtureFragment);
+                    Fragment CMJFragment = new CMJFragment();
+                    fragmentTransaction.replace(R.id.containerView,CMJFragment);
                     fragmentTransaction.commit();
                     break;
                 case 3:
-                    Fragment tableFragment = new PIJFragment();
-                    fragmentTransaction.replace(R.id.containerView,tableFragment);
+                    Fragment pijFragment = new PIJFragment();
+                    fragmentTransaction.replace(R.id.containerView,pijFragment);
                     fragmentTransaction.commit();
                     break;
                 case 6:
