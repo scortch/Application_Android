@@ -130,5 +130,6 @@
     </string>
     <string name="image_description">La mascotte de la Boit\'J</string>
     <string name="NomArticle">Article exemple</string>
+    <string name="title_activity_article">ArticleActivity</string>
 
 </resources>
