@@ -8,10 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
-public class ArticleAdapter extends ArrayAdapter<ArticleResume> {
+public class ArticleAdapter extends ArrayAdapter<ArticleResume> implements View.OnClickListener {
 
     public ArticleAdapter(Context context, List<ArticleResume> articleResumes) {
         super(context, 0, articleResumes);
@@ -39,7 +40,18 @@ public class ArticleAdapter extends ArrayAdapter<ArticleResume> {
         viewHolder.text.setText(article.getText());
         viewHolder.avatar.setImageDrawable(new ColorDrawable(article.getColor()));
 
+
+        convertView.setOnClickListener(this);
         return convertView;
+    }
+
+    @Override
+    public void onClick(View view) {
+        TextView pseudo= (TextView) view.findViewById(R.id.pseudo);
+        Toast toast = Toast.makeText(getContext(), "click item "+pseudo.getText().toString()
+                , Toast.LENGTH_LONG);
+        toast.show();
+
     }
 
     private class TweetViewHolder{
