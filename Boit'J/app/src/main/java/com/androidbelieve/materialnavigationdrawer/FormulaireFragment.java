@@ -38,7 +38,7 @@ public class FormulaireFragment extends Fragment {
                     txtObjet.setError("Veuillez mettre votre objet");
 
                 }
-                if (!TextUtils.isEmpty(strObjet) || !TextUtils.isEmpty(strFeedback)) {
+                if (!TextUtils.isEmpty(strObjet) && !TextUtils.isEmpty(strFeedback)) {
                     sendEmail();
                     subject.setText("");
                     body.setText("");
