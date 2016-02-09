@@ -2,6 +2,8 @@ package com.androidbelieve.materialnavigationdrawer;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class ArticleAdapter extends ArrayAdapter<ArticleResume> implements View.OnClickListener {
+public class ArticleAdapter extends ArrayAdapter<ArticleResume> {
 
     public ArticleAdapter(Context context, List<ArticleResume> articleResumes) {
         super(context, 0, articleResumes);
@@ -41,18 +43,18 @@ public class ArticleAdapter extends ArrayAdapter<ArticleResume> implements View.
         viewHolder.avatar.setImageDrawable(new ColorDrawable(article.getColor()));
 
 
-        convertView.setOnClickListener(this);
+//        convertView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                Fragment articleFragment = new ArticleFragment();
+//                fragmentTransaction.replace(R.id.containerView,articleFragment);
+//                fragmentTransaction.commit();
+//            }
+//        });
         return convertView;
     }
 
-    @Override
-    public void onClick(View view) {
-        TextView pseudo= (TextView) view.findViewById(R.id.pseudo);
-        Toast toast = Toast.makeText(getContext(), "click item "+pseudo.getText().toString()
-                , Toast.LENGTH_LONG);
-        toast.show();
-
-    }
 
     private class TweetViewHolder{
         public TextView pseudo;
