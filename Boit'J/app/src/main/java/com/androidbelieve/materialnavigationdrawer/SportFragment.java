@@ -24,13 +24,13 @@ public class SportFragment extends android.support.v4.app.Fragment {
             View view = inflater.inflate(R.layout.sport_layout, null);
             mListView = (ListView) view.findViewById(R.id.listView);
 
-            afficherListeTweets();
+            afficherListeArticles();
             return view;
         }
 
 
 
-    private List<ArticleResume> genererTweets(){
+    private List<ArticleResume> genererArticles(){
         List<ArticleResume> articleResumes = new ArrayList<ArticleResume>();
         articleResumes.add(new ArticleResume(Color.BLACK, "Benjamin", "Mon premier tweet !"));
         articleResumes.add(new ArticleResume(Color.BLUE, "Jordy", "C'est ici que ça se passe !"));
@@ -40,11 +40,11 @@ public class SportFragment extends android.support.v4.app.Fragment {
         return articleResumes;
     }
 
-
-    private void afficherListeTweets(){
-        List<ArticleResume> articleResumes = genererTweets();
-
+    private void afficherListeArticles(){
+        List<ArticleResume> articleResumes = genererArticles();
         ArticleAdapter adapter = new ArticleAdapter(getActivity(), articleResumes);
         mListView.setAdapter(adapter);
     }
+
+
 }
