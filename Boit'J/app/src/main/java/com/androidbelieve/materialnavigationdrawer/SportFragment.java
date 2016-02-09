@@ -33,9 +33,9 @@ public class SportFragment extends android.support.v4.app.Fragment {
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    TextView pseudo = (TextView) view.findViewById(R.id.pseudo);
-                    Toast toast = Toast.makeText(getActivity(), pseudo.getText(), Toast.LENGTH_LONG);
-                    toast.show();
+//                    TextView pseudo = (TextView) view.findViewById(R.id.pseudo);
+//                    Toast toast = Toast.makeText(getActivity(), pseudo.getText(), Toast.LENGTH_LONG);
+//                    toast.show();
                     FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                     ArticleFragment articleFragment = new ArticleFragment();
                     fragmentTransaction.replace(R.id.containerView,articleFragment);
