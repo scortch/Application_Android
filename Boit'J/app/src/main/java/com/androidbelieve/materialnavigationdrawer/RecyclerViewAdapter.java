@@ -67,8 +67,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     fragmentTransaction.commit();
                     break;
                 case 2:
-                    Fragment CMJFragment = new CMJFragment();
-                    fragmentTransaction.replace(R.id.containerView,CMJFragment);
+                    Fragment cmjFragment = new CMJFragment();
+                    fragmentTransaction.replace(R.id.containerView, cmjFragment);
                     fragmentTransaction.commit();
                     break;
                 case 3:

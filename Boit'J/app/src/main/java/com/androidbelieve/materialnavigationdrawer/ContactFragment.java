@@ -30,10 +30,11 @@ public class ContactFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                Fragment formulaireFragment = new FormulaireFragment();
-                fragmentTransaction.replace(R.id.containerView,formulaireFragment);
-                fragmentTransaction.commit();
+//                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                Fragment formulaireFragment = new FormulaireFragment();
+//                fragmentTransaction.replace(R.id.containerView,formulaireFragment);
+//                fragmentTransaction.commit();
+                  startActivity(new Intent(getActivity(),FormulaireActivity.class));
             }
         });
         return view;
