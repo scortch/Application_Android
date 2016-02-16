@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class FormulaireActivity extends FragmentActivity {
+public class FormulaireActivity extends AppCompatActivity {
     private EditText subject;
     private EditText body;
 
