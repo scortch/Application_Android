@@ -131,5 +131,6 @@
     <string name="image_description">La mascotte de la Boit\'J</string>
     <string name="NomArticle">Article exemple</string>
     <string name="title_activity_article">ArticleActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
 
 </resources>

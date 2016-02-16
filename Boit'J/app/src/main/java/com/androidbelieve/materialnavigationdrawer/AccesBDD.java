@@ -1,4 +1,4 @@
-package com.gnirt69.applicugnaux;
+package com.androidbelieve.materialnavigationdrawer;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,14 +28,19 @@ public class AccesBDD{
 
 
 
-    private void miseAjourJSON() {
-        if(this.listeJson != null && this.listeJson.size() != 0){
+    private void miseAjourJSON()
+    {
+        if(this.listeJson != null && this.listeJson.size() != 0)
+        {
             return;
         }
-        try {
+        try
+        {
             jsonStock = readJsonFromUrl(URL_JSON);
             this.listeJson = getListeJson();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             //e.printStackTrace();
             System.out.println("Erreur de reception du JSON");
         }
