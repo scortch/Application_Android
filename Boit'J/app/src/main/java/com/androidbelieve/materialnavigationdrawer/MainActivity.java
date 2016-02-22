@@ -62,11 +62,21 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Add the Very First i.e Squad Fragment to the Container
-        Fragment squadFragment = new SportFragment();
+        Fragment fragment = new HomeFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.containerView,squadFragment,null);
+        fragmentTransaction.replace(R.id.containerView,fragment,null);
         fragmentTransaction.commit();
 
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        if(getFragmentManager().getBackStackEntryCount() == 1)
+        {
+            finish();
+        }
+        super.onBackPressed();
     }
 
     void setupToolbar(){
