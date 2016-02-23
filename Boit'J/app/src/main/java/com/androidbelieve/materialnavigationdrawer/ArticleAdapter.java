@@ -24,9 +24,9 @@ public class ArticleAdapter extends ArrayAdapter<ArticleResume> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.article_resume_layout,parent, false);
         }
 
-        TweetViewHolder viewHolder = (TweetViewHolder) convertView.getTag();
+        ArticleViewHolder viewHolder = (ArticleViewHolder) convertView.getTag();
         if(viewHolder == null){
-            viewHolder = new TweetViewHolder();
+            viewHolder = new ArticleViewHolder();
             viewHolder.pseudo = (TextView) convertView.findViewById(R.id.pseudo);
             viewHolder.text = (TextView) convertView.findViewById(R.id.text);
             viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
@@ -38,22 +38,11 @@ public class ArticleAdapter extends ArrayAdapter<ArticleResume> {
         viewHolder.pseudo.setText(article.getPseudo());
         viewHolder.text.setText(article.getText());
         viewHolder.avatar.setImageDrawable(new ColorDrawable(article.getColor()));
-
-
-//        convertView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                Fragment articleFragment = new ArticleFragment();
-//                fragmentTransaction.replace(R.id.containerView,articleFragment);
-//                fragmentTransaction.commit();
-//            }
-//        });
         return convertView;
     }
 
 
-    private class TweetViewHolder{
+    private class ArticleViewHolder {
         public TextView pseudo;
         public TextView text;
         public ImageView avatar;

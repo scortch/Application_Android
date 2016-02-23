@@ -69,15 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed()
-    {
-        if(getFragmentManager().getBackStackEntryCount() == 1)
-        {
-            finish();
-        }
-        super.onBackPressed();
-    }
+
 
     void setupToolbar(){
         toolbar = (Toolbar) findViewById(R.id.toolBar);
