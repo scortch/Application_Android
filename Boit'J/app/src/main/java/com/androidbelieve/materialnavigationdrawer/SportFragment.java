@@ -1,6 +1,7 @@
 package com.androidbelieve.materialnavigationdrawer;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -33,10 +34,8 @@ public class SportFragment extends android.support.v4.app.Fragment {
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    ArticleFragment articleFragment = new ArticleFragment();
-                    fragmentTransaction.replace(R.id.containerView,articleFragment);
-                    fragmentTransaction.commit();
+                    Intent intent = new Intent(getActivity(),ArticleActivity.class);
+                    startActivity(intent);
                 }
             });
             return view;
