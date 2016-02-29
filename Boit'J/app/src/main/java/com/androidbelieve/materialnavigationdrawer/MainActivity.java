@@ -20,67 +20,94 @@ public class MainActivity extends AppCompatActivity {
     TypedArray navIcons;
     RecyclerView.Adapter recyclerViewAdapter;
     ActionBarDrawerToggle drawerToggle;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        int fragmentLoaded = this.getIntent().getIntExtra("Fragment", 0);
         //Let's first set up toolbar
         setupToolbar();
 
         //Initialize Views
-        recyclerView  = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerMainActivity);
 
         //Setup Titles and Icons of Navigation Drawer
         navTitles = getResources().getStringArray(R.array.navDrawerItems);
         navIcons = getResources().obtainTypedArray(R.array.navDrawerIcons);
 
-        
-        /**
-        *Here , pass the titles and icons array to the adapter .
-        *Additionally , pass the context of 'this' activity .
-        *So that , later we can use the fragmentManager of this activity to add/replace fragments.
-        */
 
-        recyclerViewAdapter = new RecyclerViewAdapter(navTitles,navIcons,this);
+        /**
+         *Here , pass the titles and icons array to the adapter .
+         *Additionally , pass the context of 'this' activity .
+         *So that , later we can use the fragmentManager of this activity to add/replace fragments.
+         */
+
+        recyclerViewAdapter = new RecyclerViewAdapter(navTitles, navIcons, this);
         recyclerView.setAdapter(recyclerViewAdapter);
 
         /**
-        *It is must to set a Layout Manager For Recycler View
-        *As per docs ,
-        *RecyclerView allows client code to provide custom layout arrangements for child views.
-        *These arrangements are controlled by the RecyclerView.LayoutManager.
-        *A LayoutManager must be provided for RecyclerView to function.
+         *It is must to set a Layout Manager For Recycler View
+         *As per docs ,
+         *RecyclerView allows client code to provide custom layout arrangements for child views.
+         *These arrangements are controlled by the RecyclerView.LayoutManager.
+         *A LayoutManager must be provided for RecyclerView to function.
          */
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //Finally setup ActionBarDrawerToggle
         setupDrawerToggle();
-
-
-        //Add the Very First i.e Squad Fragment to the Container
-        Fragment fragment = new HomeFragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.containerView,fragment,null);
-        fragmentTransaction.commit();
+        setupFragment(fragmentLoaded);
 
     }
 
 
-
-    void setupToolbar(){
+    void setupToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
-    void setupDrawerToggle(){
-        drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.app_name,R.string.app_name);
+    void setupDrawerToggle() {
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         //This is necessary to change the icon of the Drawer Toggle upon state change.
         drawerToggle.syncState();
     }
 
+    void setupFragment(int fragmentLoaded)
+    {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment;
+        switch (fragmentLoaded)
+        {
+            case 0:
+                fragment = new HomeFragment();
+                fragmentTransaction.replace(R.id.containerView, fragment, null);
+                fragmentTransaction.commit();
+                break;
+            case 1:
+                fragment = new SportFragment();
+                fragmentTransaction.replace(R.id.containerView, fragment, null);
+                fragmentTransaction.commit();
+                break;
+            case 2:
+                fragment = new CMJFragment();
+                fragmentTransaction.replace(R.id.containerView, fragment, null);
+                fragmentTransaction.commit();
+                break;
+            case 3:
+                fragment = new PIJFragment();
+                fragmentTransaction.replace(R.id.containerView, fragment, null);
+                fragmentTransaction.commit();
+                break;
+            case 6:
+                fragment = new ContactFragment();
+                fragmentTransaction.replace(R.id.containerView, fragment, null);
+                fragmentTransaction.commit();
+                break;
+        }
+    }
 }

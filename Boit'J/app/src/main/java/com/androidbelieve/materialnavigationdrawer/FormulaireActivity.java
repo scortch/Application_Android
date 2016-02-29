@@ -1,11 +1,12 @@
 package com.androidbelieve.materialnavigationdrawer;
 
-import android.app.Fragment;
+
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,14 @@ public class FormulaireActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulaire);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolBarFormulaire);
+        //definir notre toolbar en tant qu'actionBar
+        setSupportActionBar(toolbar);
+
+        //afficher le bouton retour
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final Button button = (Button) findViewById(R.id.ButtonSendFeedback);
         button.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +56,19 @@ public class FormulaireActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+        if(id == android.R.id.home)
+        {
+            Intent intent = new Intent(FormulaireActivity.this,MainActivity.class);
+            intent.putExtra("Fragment",6);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void sendEmail()
