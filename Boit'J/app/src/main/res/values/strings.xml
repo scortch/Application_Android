@@ -4,11 +4,12 @@
 
     <string-array name="navDrawerItems">
         <item>Sport</item>
-        <item>CMJ</item>
-        <item>PIJ</item>
         <item>Collège</item>
-        <item>Text Ô Jeunes</item>
+        <item>Mercredi</item>
+        <item>Vacances</item>
+        <item>Paramètres</item>
         <item>Contact</item>
+        <item>Mentions Légales</item>
     </string-array>
 
     <string-array name="navDrawerIcons">
@@ -24,7 +25,7 @@
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="titre_contact">Service Jeunesse</string>
+    <string name="titre_contact">Service Jeunesse (Boit\'J)</string>
     <string name="adresse_contact">Au fond du parc du Manoir 31270 Cugnaux </string>
     <string name="telephone">05.61.76.82.79</string>
     <string name="horaires">Du lundi au vendredi\n de 9h à 12h et de 13h à 17h</string>
