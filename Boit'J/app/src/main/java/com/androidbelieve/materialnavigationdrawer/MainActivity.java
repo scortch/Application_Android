@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     TypedArray navIcons;
     RecyclerView.Adapter recyclerViewAdapter;
     ActionBarDrawerToggle drawerToggle;
+    static AccesBDD bdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         int fragmentLoaded = this.getIntent().getIntExtra("Fragment", 0);
+        this.bdd = new AccesBDD();
         //Let's first set up toolbar
         setupToolbar();
 
@@ -61,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         //Finally setup ActionBarDrawerToggle
         setupDrawerToggle();
         setupFragment(fragmentLoaded);
+
+
 
     }
 

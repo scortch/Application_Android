@@ -22,34 +22,44 @@ import java.util.List;
  */
 public class SportFragment extends android.support.v4.app.Fragment {
 
-        ListView mListView;
+    ListView mListView;
+    AccesBDD bdd = MainActivity.bdd;
+    String idCateguorie = "[2]";
 
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.sport_layout, null);
-            mListView = (ListView) view.findViewById(R.id.listView);
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-            afficherListeArticles();
-            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getActivity(),ArticleActivity.class);
-                    startActivity(intent);
-                }
-            });
-            return view;
+        View view = inflater.inflate(R.layout.sport_layout, null);
+        mListView = (ListView) view.findViewById(R.id.listView);
+
+        afficherListeArticles();
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(),ArticleActivity.class);
+                intent.putExtra("idArticle",MainActivity.bdd.getIdArticle(idCateguorie,position));
+                startActivity(intent);
+            }
+        });
+        return view;
         }
 
 
 
     private List<ArticleResume> genererArticles(){
         List<ArticleResume> articleResumes = new ArrayList<ArticleResume>();
-        articleResumes.add(new ArticleResume(Color.BLACK, "Benjamin", "Mon premier tweet !"));
-        articleResumes.add(new ArticleResume(Color.BLUE, "Jordy", "C'est ici que ça se passe !"));
-        articleResumes.add(new ArticleResume(Color.GREEN, "Clément", "Que c'est beau..."));
-        articleResumes.add(new ArticleResume(Color.RED, "Evan", "Il est quelle heure ??"));
-        articleResumes.add(new ArticleResume(Color.GRAY, "Pierre", "On y est presque"));
+
+        for(int i = 0; i < bdd.getNombreArticle(idCateguorie) ; i++){
+            String numArticle = bdd.getIdArticle(idCateguorie,i);
+            articleResumes.add(
+                    new ArticleResume(
+                            Color.BLACK,
+                            bdd.getTitreArticle(numArticle),
+                            "description"));
+        }
+
+
         return articleResumes;
     }
 

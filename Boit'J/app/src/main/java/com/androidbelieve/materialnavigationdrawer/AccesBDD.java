@@ -18,15 +18,18 @@ import java.util.ArrayList;
 /**
  * Created by Pierre Brengues on 28/01/2016.
  */
-public class AccesBDD{
+public class AccesBDD {
 
     private final String URL_JSON = "https://boitej.ville-cugnaux.fr/wp-json/wp/v2/posts";
     private final String URL_JSON_MEDIA = "https://boitej.ville-cugnaux.fr/wp-json/wp/v2/media";
 
-    private String jsonStock;
-    private ArrayList<JSONObject> listeJson;
+    static String jsonStock;
+    static ArrayList<JSONObject> listeJson = new ArrayList<JSONObject>();
 
-
+    public AccesBDD(){
+        super();
+        miseAjourJSON();
+    }
 
     private void miseAjourJSON()
     {
@@ -34,16 +37,23 @@ public class AccesBDD{
         {
             return;
         }
-        try
-        {
-            jsonStock = readJsonFromUrl(URL_JSON);
-            this.listeJson = getListeJson();
-        }
-        catch (Exception e)
-        {
-            //e.printStackTrace();
-            System.out.println("Erreur de reception du JSON");
-        }
+        Thread T = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try
+                {
+                    AccesBDD.jsonStock = readJsonFromUrl(URL_JSON);
+                    AccesBDD.listeJson = getListeJson();
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                    //System.out.println("Erreur de reception du JSON");
+                }
+            }
+        });
+        T.start();
+
     }
 
     private String readAll(Reader rd) throws IOException {

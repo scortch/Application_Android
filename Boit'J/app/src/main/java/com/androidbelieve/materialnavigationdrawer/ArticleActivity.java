@@ -5,7 +5,9 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ArticleActivity extends AppCompatActivity {
@@ -23,9 +25,15 @@ public class ArticleActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        String idArticle = this.getIntent().getStringExtra("idArticle");
+
+        TextView titre = (TextView) findViewById(R.id.Titre);
+        TextView contenu = (TextView) findViewById(R.id.Contenu);
+        ImageView image = (ImageView) findViewById(R.id.Image);
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "arial.ttf");
-        TextView myTextView = (TextView)findViewById(R.id.Titre);
-        myTextView.setTypeface(myTypeface);
+        titre.setTypeface(myTypeface);
+        titre.setText(Html.fromHtml(MainActivity.bdd.getTitreArticle(idArticle)));
+        contenu.setText(Html.fromHtml(MainActivity.bdd.getTexteArticle(idArticle)));
     }
 
     @Override

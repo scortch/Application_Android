@@ -43,12 +43,12 @@
                 android:layout_height="@dimen/image_size"
                 android:src="@drawable/mascotte_boitej"
                 android:layout_gravity="center"
-                android:contentDescription="@string/image_description"/>
+                android:contentDescription="@string/QuatreCentQuatre"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/LoremIpsum"
+                android:text="@string/QuatreCentQuatre"
                 android:id="@+id/Contenu"
                 android:textColor="@color/couleur_contenu"
                 android:layout_marginLeft="@dimen/text_margin_borders"
