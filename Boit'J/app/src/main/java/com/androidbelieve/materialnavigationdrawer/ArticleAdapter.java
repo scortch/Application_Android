@@ -2,6 +2,7 @@ package com.androidbelieve.materialnavigationdrawer;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +36,9 @@ public class ArticleAdapter extends ArrayAdapter<ArticleResume> {
 
 
         ArticleResume article = getItem(position);
-        viewHolder.pseudo.setText(article.getPseudo());
-        viewHolder.text.setText(article.getText());
-        viewHolder.avatar.setImageDrawable(new ColorDrawable(article.getColor()));
+        viewHolder.pseudo.setText(Html.fromHtml(article.getPseudo()));
+        viewHolder.text.setText(Html.fromHtml(article.getText()));
+        viewHolder.avatar.setImageBitmap(article.getColor());
         return convertView;
     }
 

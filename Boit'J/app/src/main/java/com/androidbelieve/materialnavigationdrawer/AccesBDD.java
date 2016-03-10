@@ -14,6 +14,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Pierre Brengues on 28/01/2016.
@@ -22,6 +23,8 @@ public class AccesBDD {
 
     private final String URL_JSON = "https://boitej.ville-cugnaux.fr/wp-json/wp/v2/posts";
     private final String URL_JSON_MEDIA = "https://boitej.ville-cugnaux.fr/wp-json/wp/v2/media";
+
+    private static HashMap<String,Bitmap> stockImages = new HashMap<String,Bitmap>();
 
     static String jsonStock;
     static ArrayList<JSONObject> listeJson = new ArrayList<JSONObject>();
@@ -70,7 +73,10 @@ public class AccesBDD {
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             return readAll(rd);
-        } finally {
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }finally {
             is.close();
         }
     }
@@ -114,7 +120,24 @@ public class AccesBDD {
         return  listeJson;
     }
 
-    public Bitmap getDrawableFromUrl(String url) {
+
+    public Bitmap getImageArticle(String numArticle){
+
+        if(this.stockImages.containsKey(numArticle)){
+            return this.stockImages.get(numArticle);
+        }
+        Bitmap imgBitmap = getDrawableFromUrl(getAddresseImage(numArticle));
+        if(imgBitmap != null){
+            this.stockImages.put(numArticle,imgBitmap);
+        }
+
+        return imgBitmap;
+
+    }
+
+
+
+    private Bitmap getDrawableFromUrl(String url) {
         try {
             StringBuffer sb = new StringBuffer(url);
             sb.insert(4,'s');
@@ -123,13 +146,13 @@ public class AccesBDD {
             in = new URL(url).openStream();
             return BitmapFactory.decodeStream(in);
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             return null;
         }
     }
 
 
-    public String getAddresseImage(String numArticle){
+    private String getAddresseImage(String numArticle){
         try {
             String id_image = "";
 
@@ -147,7 +170,7 @@ public class AccesBDD {
             //return "<img src=\""+image_url+"\">";
 
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             return null;
         }
 
@@ -175,6 +198,11 @@ public class AccesBDD {
 
     public String getTitreArticle(String numArticle){
         return getStringFromJson("title", numArticle);
+    }
+
+    public String getDescriptionArticle(String numArticle){
+
+        return getStringFromJson("content", numArticle).substring(0,35)+"...";
     }
 
 

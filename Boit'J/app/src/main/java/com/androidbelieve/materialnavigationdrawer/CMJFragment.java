@@ -8,14 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Ratan on 7/9/2015.
+ * Created by pierre on 7/9/2015.
  */
-public class CMJFragment extends Fragment {
+public class CMJFragment extends ArticleFragment {
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.cmj_layout,null);
+    public CMJFragment(){
+        super();
+        this.idCateguorie = "all";
     }
+
+
 }

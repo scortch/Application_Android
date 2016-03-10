@@ -41,7 +41,6 @@
                 android:id="@+id/Image"
                 android:layout_width="@dimen/image_size"
                 android:layout_height="@dimen/image_size"
-                android:src="@drawable/mascotte_boitej"
                 android:layout_gravity="center"
                 android:contentDescription="@string/QuatreCentQuatre"/>
 

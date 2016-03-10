@@ -1,24 +1,26 @@
 package com.androidbelieve.materialnavigationdrawer;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by florentchampigny on 24/02/15.
  */
 public class ArticleResume {
-    private int color;
+    private Bitmap color;
     private String pseudo;
     private String text;
 
-    public ArticleResume(int color, String pseudo, String text) {
+    public ArticleResume(Bitmap color, String pseudo, String text) {
         this.color = color;
         this.pseudo = pseudo;
         this.text = text;
     }
 
-    public int getColor() {
+    public Bitmap getColor() {
         return color;
     }
 
-    public void setColor(int color) {
+    public void setColor(Bitmap color) {
         this.color = color;
     }
 
