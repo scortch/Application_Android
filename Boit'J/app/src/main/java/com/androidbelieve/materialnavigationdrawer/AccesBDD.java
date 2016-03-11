@@ -1,5 +1,7 @@
 package com.androidbelieve.materialnavigationdrawer;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -7,9 +9,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -28,34 +35,43 @@ public class AccesBDD {
 
     static String jsonStock;
     static ArrayList<JSONObject> listeJson = new ArrayList<JSONObject>();
+    private final Context mainActivity;
 
-    public AccesBDD(){
+    public AccesBDD(Context mainActivity){
         super();
+        this.mainActivity = mainActivity;
         miseAjourJSON();
     }
 
+
     private void miseAjourJSON()
     {
-        if(this.listeJson != null && this.listeJson.size() != 0)
-        {
-            return;
-        }
+        SharedPreferences sharedPref = mainActivity.getSharedPreferences("bdd", Context.MODE_PRIVATE);
+        String bdd = sharedPref.getString("bdd", null);
+
+
         Thread T = new Thread(new Runnable() {
             @Override
             public void run() {
                 try
                 {
-                    AccesBDD.jsonStock = readJsonFromUrl(URL_JSON);
-                    AccesBDD.listeJson = getListeJson();
+                    jsonStock = readJsonFromUrl(URL_JSON);
+
+                    SharedPreferences sharedPref = mainActivity.getSharedPreferences("bdd",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("bdd", jsonStock);
+                    editor.commit();
                 }
                 catch (Exception e)
                 {
-                    e.printStackTrace();
-                    //System.out.println("Erreur de reception du JSON");
+                    SharedPreferences sharedPref = mainActivity.getSharedPreferences("bdd", Context.MODE_PRIVATE);
+                    jsonStock = sharedPref.getString("bdd", null);
                 }
+                listeJson = getListeJson();
             }
         });
         T.start();
+
 
     }
 
@@ -74,7 +90,7 @@ public class AccesBDD {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             return readAll(rd);
         }catch(Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
             return null;
         }finally {
             is.close();
@@ -129,8 +145,8 @@ public class AccesBDD {
         Bitmap imgBitmap = getDrawableFromUrl(getAddresseImage(numArticle));
         if(imgBitmap != null){
             this.stockImages.put(numArticle,imgBitmap);
-        }
 
+        }
         return imgBitmap;
 
     }
@@ -146,7 +162,7 @@ public class AccesBDD {
             in = new URL(url).openStream();
             return BitmapFactory.decodeStream(in);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return null;
         }
     }
@@ -170,7 +186,7 @@ public class AccesBDD {
             //return "<img src=\""+image_url+"\">";
 
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return null;
         }
 
@@ -179,7 +195,6 @@ public class AccesBDD {
 
 
     private String getStringFromJson(String idChamp, String numArticle){
-        miseAjourJSON();
         try {
 
             for(int i = 0; i < this.listeJson.size(); i++){
@@ -218,7 +233,6 @@ public class AccesBDD {
      * @return le nombre d"articles dans cette catégorie
      */
     public int getNombreArticle(String categorie) {
-        miseAjourJSON();
 
         if(categorie == "all"){
             return this.listeJson.size();
@@ -247,7 +261,6 @@ public class AccesBDD {
      * @return l'id de l'article
      */
     public String getIdArticle(String categorie, int numArticleDansCat) {
-        miseAjourJSON();
         int compteur = 0;
         try {
             for(int i = 0; i < this.listeJson.size(); i++){

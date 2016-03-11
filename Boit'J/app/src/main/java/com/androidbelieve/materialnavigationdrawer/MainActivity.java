@@ -1,4 +1,6 @@
 package com.androidbelieve.materialnavigationdrawer;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -25,10 +27,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        this.bdd = new AccesBDD(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         int fragmentLoaded = this.getIntent().getIntExtra("Fragment", 0);
-        this.bdd = new AccesBDD();
+
+
+
+
+
+
         //Let's first set up toolbar
         setupToolbar();
 
@@ -67,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
 
     void setupToolbar() {

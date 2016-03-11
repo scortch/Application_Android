@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class ArticleActivity extends AppCompatActivity {
 
     static Bitmap imageBitmap;
-    private static boolean erreurImage;
+    public static boolean erreurImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,11 @@ public class ArticleActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final String idArticle = this.getIntent().getStringExtra("idArticle");
+
+        /*System.out.println(
+                "****\r\"****\n\"****\n\"****\n\"****\n\"****\n\"****\n\"****\n" +
+                "id article = "+idArticle+"\n"+
+                "****\r\"****\n\"****\n\"****\n\"****\n\"****\n\"****\n\"****");*/
 
         TextView titre = (TextView) findViewById(R.id.Titre);
         TextView contenu = (TextView) findViewById(R.id.Contenu);
@@ -67,8 +72,10 @@ public class ArticleActivity extends AppCompatActivity {
             }
         }
 
-        ImageView image = (ImageView) findViewById(R.id.Image);
-        image.setImageBitmap(imageBitmap);
+        if(imageBitmap!=null) {
+            ImageView image = (ImageView) findViewById(R.id.Image);
+            image.setImageBitmap(imageBitmap);
+        }
 
 
     }
