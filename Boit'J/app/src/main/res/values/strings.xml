@@ -44,5 +44,6 @@
     <string name="NomArticle">Article exemple</string>
     <string name="title_activity_article">ArticleActivity</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_map_location_boit_j">MapLocationBoitJ</string>
 
 </resources>
