@@ -33,7 +33,6 @@ public class ContactFragment extends Fragment {
                   startActivity(new Intent(getActivity(),FormulaireActivity.class));
             }
         });
-
         return view;
     }
 
