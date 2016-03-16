@@ -30,6 +30,7 @@ public class AccesBDD {
 
     private final String URL_JSON = "https://boitej.ville-cugnaux.fr/wp-json/wp/v2/posts";
     private final String URL_JSON_MEDIA = "https://boitej.ville-cugnaux.fr/wp-json/wp/v2/media";
+    private HashMap<String,String> tabMois = new HashMap<String,String>();
 
     private static HashMap<String,Bitmap> stockImages = new HashMap<String,Bitmap>();
 
@@ -37,10 +38,31 @@ public class AccesBDD {
     static ArrayList<JSONObject> listeJson = new ArrayList<JSONObject>();
     private final Context mainActivity;
 
+
+
+
+
+
+
     public AccesBDD(Context mainActivity){
         super();
         this.mainActivity = mainActivity;
+
+        tabMois.put("01","Janvier");
+        tabMois.put("02","Février");
+        tabMois.put("03","Mars");
+        tabMois.put("04","Avril");
+        tabMois.put("05","Mai");
+        tabMois.put("06","Juin");
+        tabMois.put("07","Juillet");
+        tabMois.put("08","Août");
+        tabMois.put("09","Septembre");
+        tabMois.put("10","Octobre");
+        tabMois.put("11","Novembre");
+        tabMois.put("12","Decembre");
+
         miseAjourJSON();
+
     }
 
 
@@ -199,8 +221,16 @@ public class AccesBDD {
 
 
     private String reecrireDate(String dateBrute){
-        //"2016-02-02T09:01:21"
-        return dateBrute;
+
+
+
+
+        String annee = dateBrute.substring(0,3);
+        String mois = tabMois.get(dateBrute.substring(5, 6));
+        String jour = dateBrute.substring(8,9);
+
+
+        return jour + " "+ mois + " "+ annee;
     }
 
 
