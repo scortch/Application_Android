@@ -101,7 +101,6 @@ public class AccesBDD {
         editor.commit();
     }
 
-
     private String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
@@ -195,7 +194,6 @@ public class AccesBDD {
     }
 
 
-
     private Bitmap getDrawableFromUrl(String url) {
         try {
             StringBuffer sb = new StringBuffer(url);
@@ -237,7 +235,17 @@ public class AccesBDD {
 
 
     public String getDateArticle(String numArticle) {
-        return reecrireDate(getStringFromJson("date", numArticle));
+        try {
+            for(int i = 0; i < this.listeJson.size(); i++){
+                if(this.listeJson.get(i).getString("id").equals(numArticle)){
+                    return reecrireDate(this.getListeJson().get(i).getString("date"));
+                }
+            }
+        } catch (Exception e) {
+            return "Erreur : téléchargement";
+        }
+
+        return "Erreur : article introuvable";
     }
 
 
@@ -245,10 +253,14 @@ public class AccesBDD {
 
 
 
+        if(dateBrute == null || dateBrute.length() < 9){
+            return "erreur format date";
+        }
 
-        String annee = dateBrute.substring(0,3);
-        String mois = tabMois.get(dateBrute.substring(5, 6));
-        String jour = dateBrute.substring(8, 9);
+
+        String annee = dateBrute.substring(0,4);
+        String mois = tabMois.get(dateBrute.substring(5, 7));
+        String jour = dateBrute.substring(8, 10);
 
 
         return jour + " "+ mois + " "+ annee;
@@ -257,18 +269,16 @@ public class AccesBDD {
 
     private String getStringFromJson(String idChamp, String numArticle){
         try {
-
             for(int i = 0; i < this.listeJson.size(); i++){
                 if(this.listeJson.get(i).getString("id").equals(numArticle)){
-
                     JSONObject obj = this.listeJson.get(i).getJSONObject(idChamp);
                     return obj.getString("rendered");
                 }
             }
         } catch (Exception e) {
-            return "ERREUR";
+            return "Erreur : téléchargement";
         }
-        return "article introuvable";
+        return "Erreur : article introuvable";
     }
 
 

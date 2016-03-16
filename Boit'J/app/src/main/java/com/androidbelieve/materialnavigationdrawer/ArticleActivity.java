@@ -46,7 +46,7 @@ public class ArticleActivity extends AppCompatActivity {
         dateArticle.setTypeface(myTypeface);
         titre.setText(Html.fromHtml(MainActivity.bdd.getTitreArticle(idArticle)));
         contenu.setText(Html.fromHtml(MainActivity.bdd.getTexteArticle(idArticle)));
-        dateArticle.setText(Html.fromHtml(MainActivity.bdd.getDateArticle(idArticle)));
+        dateArticle.setText("Paru le "+MainActivity.bdd.getDateArticle(idArticle));
 
 
         imageBitmap = null;
