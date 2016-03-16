@@ -38,12 +38,15 @@ public class ArticleActivity extends AppCompatActivity {
 
         TextView titre = (TextView) findViewById(R.id.Titre);
         TextView contenu = (TextView) findViewById(R.id.Contenu);
+        TextView dateArticle = (TextView) findViewById(R.id.DateArticle);
 
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "arial.ttf");
         titre.setTypeface(myTypeface);
+        contenu.setTypeface(myTypeface);
+        dateArticle.setTypeface(myTypeface);
         titre.setText(Html.fromHtml(MainActivity.bdd.getTitreArticle(idArticle)));
         contenu.setText(Html.fromHtml(MainActivity.bdd.getTexteArticle(idArticle)));
-
+        dateArticle.setText(Html.fromHtml(MainActivity.bdd.getDateArticle(idArticle)));
 
 
         imageBitmap = null;
