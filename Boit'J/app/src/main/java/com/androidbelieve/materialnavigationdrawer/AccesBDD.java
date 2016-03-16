@@ -193,6 +193,11 @@ public class AccesBDD {
     }
 
 
+    public String getDateArticle(String numArticle) {
+        // TODO
+        return "TODO  date";
+    }
+
 
     private String getStringFromJson(String idChamp, String numArticle){
         try {
