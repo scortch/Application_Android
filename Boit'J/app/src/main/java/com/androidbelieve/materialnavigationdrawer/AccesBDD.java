@@ -194,8 +194,13 @@ public class AccesBDD {
 
 
     public String getDateArticle(String numArticle) {
-        // TODO
-        return "TODO  date";
+        return reecrireDate(getStringFromJson("date", numArticle));
+    }
+
+
+    private String reecrireDate(String dateBrute){
+        //"2016-02-02T09:01:21"
+        return dateBrute;
     }
 
 
