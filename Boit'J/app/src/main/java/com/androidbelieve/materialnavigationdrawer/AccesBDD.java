@@ -9,14 +9,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -36,17 +31,14 @@ public class AccesBDD {
 
     static String jsonStock;
     static ArrayList<JSONObject> listeJson = new ArrayList<JSONObject>();
-    private final Context mainActivity;
+    private SharedPreferences sharedPref;
 
 
+    
 
-
-
-
-
-    public AccesBDD(Context mainActivity){
+    public AccesBDD(SharedPreferences sharedPref){
         super();
-        this.mainActivity = mainActivity;
+        this.sharedPref = sharedPref;
 
         tabMois.put("01","Janvier");
         tabMois.put("02","Février");
@@ -66,36 +58,49 @@ public class AccesBDD {
     }
 
 
-    private void miseAjourJSON()
-    {
-        SharedPreferences sharedPref = mainActivity.getSharedPreferences("bdd", Context.MODE_PRIVATE);
-        String bdd = sharedPref.getString("bdd", null);
-
-
+    /**
+     * Dans un thread à part :
+     * télécharge les données du site, puis:
+     * -si réussite: màj + sauvegarde sur le portable
+     * -si échec: chargementPortable puis màj depuis chargement
+     */
+    private void miseAjourJSON() {
         Thread T = new Thread(new Runnable() {
             @Override
             public void run() {
                 try
                 {
                     jsonStock = readJsonFromUrl(URL_JSON);
-
-                    SharedPreferences sharedPref = mainActivity.getSharedPreferences("bdd",Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("bdd", jsonStock);
-                    editor.commit();
-                }
-                catch (Exception e)
-                {
-                    SharedPreferences sharedPref = mainActivity.getSharedPreferences("bdd", Context.MODE_PRIVATE);
-                    jsonStock = sharedPref.getString("bdd", null);
+                    sauvegarderBDD(jsonStock);
+                } catch (Exception e) {
+                    jsonStock = chargerBDD();
                 }
                 listeJson = getListeJson();
             }
         });
         T.start();
-
-
     }
+
+    /**
+    * renvoi le json stocké sur le portable
+     */
+    private String chargerBDD() {
+        //SharedPreferences sharedPref = mainActivity.getSharedPreferences("bdd", Context.MODE_PRIVATE);
+        return sharedPref.getString("bdd", null);
+    }
+
+    /**
+     * sauvegarde le string en param en tant
+     * que json sauvegardé sur le portable
+     * @param jsonStock
+     */
+    private void sauvegarderBDD(String jsonStock) {
+        //SharedPreferences sharedPref = mainActivity.getSharedPreferences("bdd",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("bdd", jsonStock);
+        editor.commit();
+    }
+
 
     private String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
@@ -106,6 +111,14 @@ public class AccesBDD {
         return sb.toString();
     }
 
+    /**
+     * renvoi sous forme de texte le json télécharger sur l'url en param
+     * renvoi null si echec de téléchargement
+     * @param url l'url du json
+     * @return string json
+     * @throws IOException
+     * @throws JSONException
+     */
     private String readJsonFromUrl(String url)throws IOException, JSONException {
         InputStream is = new URL(url).openStream();
         try {
@@ -119,6 +132,10 @@ public class AccesBDD {
         }
     }
 
+    /**
+     * à partir de l'attribut jsonstock, on génère une liste des éléments du json
+     * @return liste des élément du json
+     */
     private ArrayList<JSONObject> getListeJson(){
 
         if(jsonStock == null){
@@ -158,7 +175,11 @@ public class AccesBDD {
         return  listeJson;
     }
 
-
+    /**
+     *
+     * @param numArticle
+     * @return
+     */
     public Bitmap getImageArticle(String numArticle){
 
         if(this.stockImages.containsKey(numArticle)){
@@ -227,7 +248,7 @@ public class AccesBDD {
 
         String annee = dateBrute.substring(0,3);
         String mois = tabMois.get(dateBrute.substring(5, 6));
-        String jour = dateBrute.substring(8,9);
+        String jour = dateBrute.substring(8, 9);
 
 
         return jour + " "+ mois + " "+ annee;

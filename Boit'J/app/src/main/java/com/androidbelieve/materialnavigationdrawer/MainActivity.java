@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        this.bdd = new AccesBDD(this);
+        this.bdd = new AccesBDD(this.getSharedPreferences("bdd",Context.MODE_PRIVATE));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         int fragmentLoaded = this.getIntent().getIntExtra("Fragment", 0);
