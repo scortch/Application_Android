@@ -1,8 +1,10 @@
 package com.androidbelieve.materialnavigationdrawer;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+
+import com.google.android.gms.maps.SupportMapFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.Adapter recyclerViewAdapter;
     ActionBarDrawerToggle drawerToggle;
     static AccesBDD bdd;
+    static SupportMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -72,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         setupDrawerToggle();
         setupFragment(fragmentLoaded);
 
-
+         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
     }
 
