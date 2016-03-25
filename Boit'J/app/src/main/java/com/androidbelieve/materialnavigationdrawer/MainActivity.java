@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.Adapter recyclerViewAdapter;
     ActionBarDrawerToggle drawerToggle;
     static AccesBDD bdd;
-    static SupportMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         setupDrawerToggle();
         setupFragment(fragmentLoaded);
 
-         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+
 
     }
 
