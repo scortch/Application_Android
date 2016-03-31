@@ -3,23 +3,31 @@ package com.androidbelieve.materialnavigationdrawer;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareButton;
+
 public class ArticleActivity extends AppCompatActivity {
 
     static Bitmap imageBitmap;
     public static boolean erreurImage;
+    private ShareButton shareButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_article);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolBarArticle);
         //definir notre toolbar en tant qu'actionBar
@@ -38,7 +46,11 @@ public class ArticleActivity extends AppCompatActivity {
 
         TextView titre = (TextView) findViewById(R.id.Titre);
         TextView contenu = (TextView) findViewById(R.id.Contenu);
+        shareButton = (ShareButton) findViewById(R.id.fb_share_button);
         TextView dateArticle = (TextView) findViewById(R.id.DateArticle);
+
+
+
 
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "arial.ttf");
         titre.setTypeface(myTypeface);
@@ -79,7 +91,14 @@ public class ArticleActivity extends AppCompatActivity {
             ImageView image = (ImageView) findViewById(R.id.Image);
             image.setImageBitmap(imageBitmap);
         }
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse("https://boitj.wordpress.com/"))
+                .setImageUrl(Uri.parse("http://www.culture31.com/images/LOGOS/logo_mairiecugnaux.jpg"))
+                .setContentTitle(titre.getText().toString())
+                .setContentDescription(contenu.getText().toString())
+                .build();
 
+        shareButton.setShareContent(content);
 
     }
 
