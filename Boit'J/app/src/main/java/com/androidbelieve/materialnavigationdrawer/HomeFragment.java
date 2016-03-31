@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
 
 
 
-        while(MainActivity.bdd.listeJson.size() == 0){
+        while(MainActivity.bdd.listeJson == null || MainActivity.bdd.listeJson.size() == 0){
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
