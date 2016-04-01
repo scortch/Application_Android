@@ -1,49 +1,48 @@
 package com.androidbelieve.materialnavigationdrawer;
 
+import junit.framework.Assert;
+
+import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
- * Created by Pierre on 31/03/2016.
+ * Created by Pierre Brengues on 05/02/2016.
  */
 public class AccesBDDTest {
 
-    @org.junit.Before
-    public void setUp() throws Exception {
-
-    }
-
-    @org.junit.Test
+    @Test
     public void testGetImageArticle() throws Exception {
-
+        Assert.assertTrue(true);
     }
 
-    @org.junit.Test
+    @Test
     public void testGetDateArticle() throws Exception {
-
+        Assert.assertTrue(true);
     }
 
-    @org.junit.Test
+    @Test
     public void testGetTitreArticle() throws Exception {
-
+        Assert.assertTrue(true);
     }
 
-    @org.junit.Test
+    @Test
     public void testGetDescriptionArticle() throws Exception {
-
+        Assert.assertTrue(true);
     }
 
-    @org.junit.Test
+    @Test
     public void testGetTexteArticle() throws Exception {
-
+        Assert.assertTrue(true);
     }
 
-    @org.junit.Test
+    @Test
     public void testGetNombreArticle() throws Exception {
-
+        Assert.assertTrue(true);
     }
 
-    @org.junit.Test
+    @Test
     public void testGetIdArticle() throws Exception {
-
+        Assert.assertTrue(true);
     }
 }
