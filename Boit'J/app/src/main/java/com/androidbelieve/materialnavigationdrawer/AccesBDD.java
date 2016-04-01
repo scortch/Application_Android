@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,12 +35,16 @@ public class AccesBDD {
     private SharedPreferences sharedPref;
 
 
-    
+
 
     public AccesBDD(SharedPreferences sharedPref){
         super();
         this.sharedPref = sharedPref;
+        initialiserMois();
+        miseAjourJSON();
+    }
 
+    private void initialiserMois() {
         tabMois.put("01","Janvier");
         tabMois.put("02","Février");
         tabMois.put("03","Mars");
@@ -52,9 +57,6 @@ public class AccesBDD {
         tabMois.put("10","Octobre");
         tabMois.put("11","Novembre");
         tabMois.put("12","Decembre");
-
-        miseAjourJSON();
-
     }
 
 
